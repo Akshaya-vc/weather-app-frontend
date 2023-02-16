@@ -1,7 +1,7 @@
 import { Cookies } from "react-cookie";
 import weatherAPI from "./config";
 
-export const fetchWeather = (location) => {
+export const currentWeather = (location) => {
   const cookies = new Cookies();
   const token = cookies.get("token");
   const config = {
@@ -12,7 +12,10 @@ export const fetchWeather = (location) => {
   };
   return new Promise((resolve, reject) => {
     weatherAPI
-      .get(`/current.json?key=${process.env.REACT_APP_API_KEY}&q=${location}`, config)
+      .get(
+        `/current.json?key=${process.env.REACT_APP_API_KEY}&q=${location}`,
+        config
+      )
       .then((res) => {
         resolve(res);
         if (res.status !== 200) {

@@ -7,3 +7,13 @@
 .search-btn-icon {
   width: 20px;
 }
+
+.forecast-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forecast-item{
+  padding: 2%;
+}
