@@ -16,12 +16,17 @@ const Home = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState({});
   const parameters = [
-    { variable: "humidity", name: "Humidity", icon: HumidityIcon },
-    { variable: "uv", name: "UV", icon: UVIcon },
-    { variable: "wind_kph", name: "Wind", icon: WindIcon },
-    { variable: "vis_km", name: "Visibility", icon: VisibilityIcon },
-    { variable: "precip_mm", name: "Precipitation", icon: PrecipitationIcon },
-    { variable: "pressure_mb", name: "Pressure", icon: PressureIcon },
+    { variable: "humidity", name: "Humidity", icon: HumidityIcon, unit: "" },
+    { variable: "uv", name: "UV", icon: UVIcon, unit: "" },
+    { variable: "wind_kph", name: "Wind", icon: WindIcon, unit: "kph" },
+    { variable: "vis_km", name: "Visibility", icon: VisibilityIcon, unit: "km" },
+    {
+      variable: "precip_mm",
+      name: "Precipitation",
+      icon: PrecipitationIcon,
+      unit: "mm",
+    },
+    { variable: "pressure_mb", name: "Pressure", icon: PressureIcon, unit: "mb" },
   ];
   const [toggleScale, setToggleScale] = useState({
     temperature: false,
@@ -52,17 +57,15 @@ const Home = () => {
   };
 
   const detailedView = (parameter, index) => {
-    console.log(
-      "parapar",
-      parameter.variable,
-      data.current[parameter.variable]
-    );
     return (
-      <div className="parameter-item">
+      <div className="parameter-item" key={index}>
+        <div className="parameter-heading">
+          <img className="parameter-icon" src={parameter.icon} alt="" />
+          <div className="parameter-item-name">{parameter.name}</div>
+        </div>{" "}
         <h2 className="parameter-item-value">
-          {data.current[parameter.variable]}
+          {data.current[parameter.variable]} {parameter.unit}
         </h2>
-        <div className="parameter-item-name">{parameter.name}</div>
       </div>
     );
   };
@@ -141,14 +144,16 @@ const Home = () => {
 
       {Object.keys(data).length !== 0 ? (
         <div className="content">
-          <h2>{data.location.name}</h2>
-          <h3>
-            {data.location.region} {data.location.region ? ", " : " "}
-            {data.location.country}
-          </h3>
+          <div className="location-details">
+            <h2>{data.location.name}</h2>
+            <h3>
+              {data.location.region} {data.location.region ? ", " : " "}
+              {data.location.country}
+            </h3>
+          </div>
+
           <div className="content-columns">
             <div className="overview">
-              {" "}
               <img
                 src={data.current.condition.icon}
                 className="main-icon"
