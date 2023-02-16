@@ -2,12 +2,27 @@ import React, { useState, useEffect } from "react";
 import "./Home.page.css";
 import { fetchForecast } from "../../api/forecast";
 
+import WindIcon from "../../assets/Wind.png";
+import VisibilityIcon from "../../assets/Rainbow.png";
+import PrecipitationIcon from "../../assets/Cloud.png";
+import PressureIcon from "../../assets/Temperature half.png";
+import HumidityIcon from "../../assets/Raindrops.png";
+import UVIcon from "../../assets/Sun.png";
+// import SearchIcon from "../../assets/search-icon.png";
+const SearchIcon =
+  "https://www.freeiconspng.com/thumbs/search-icon-png/search-icon-png-17.png";
+
 const Home = () => {
-  const searchIconLink =
-    "https://assets.stickpng.com/images/585e4ae1cb11b227491c3393.png";
   const [input, setInput] = useState("");
   const [data, setData] = useState({});
-  const [more, setMore] = useState(false);
+  const parameters = [
+    { variable: "humidity", name: "Humidity", icon: HumidityIcon },
+    { variable: "uv", name: "UV", icon: UVIcon },
+    { variable: "wind_kph", name: "Wind", icon: WindIcon },
+    { variable: "vis_km", name: "Visibility", icon: VisibilityIcon },
+    { variable: "precip_mm", name: "Precipitation", icon: PrecipitationIcon },
+    { variable: "pressure_mb", name: "Pressure", icon: PressureIcon },
+  ];
   const [toggleScale, setToggleScale] = useState({
     temperature: false,
     distance: false,
@@ -34,6 +49,22 @@ const Home = () => {
 
   const handleTempToggle = () => {
     setToggleScale({ ...toggleScale, temperature: !toggleScale.temperature });
+  };
+
+  const detailedView = (parameter, index) => {
+    console.log(
+      "parapar",
+      parameter.variable,
+      data.current[parameter.variable]
+    );
+    return (
+      <div className="parameter-item">
+        <h2 className="parameter-item-value">
+          {data.current[parameter.variable]}
+        </h2>
+        <div className="parameter-item-name">{parameter.name}</div>
+      </div>
+    );
   };
 
   const forecastComponent = (perDayData, index) => {
@@ -78,23 +109,39 @@ const Home = () => {
           >
             <img
               className="search-btn-icon"
-              src={searchIconLink}
+              src={SearchIcon}
               alt="search-icon"
             />
           </button>
         </div>
         {/* Toggle temperature scale */}
         <div className="scale">
-          Temperature scale
-          <button onClick={handleTempToggle}>
-            {toggleScale.temperature ? "C" : "F"}
+          <div className="scale-heading">Temperature scale</div>
+
+          <button
+            style={{
+              backgroundColor: !toggleScale.temperature ? "#4dabf5" : "white",
+            }}
+            className="scale-icon scale-icon-1"
+            onClick={handleTempToggle}
+          >
+            Celsius
+          </button>
+          <button
+            style={{
+              backgroundColor: toggleScale.temperature ? "#4dabf5" : "white",
+            }}
+            className="scale-icon scale-icon-2"
+            onClick={handleTempToggle}
+          >
+            Farenheit
           </button>
         </div>
       </div>
 
       {Object.keys(data).length !== 0 ? (
         <div className="content">
-          <h1>{data.location.name}</h1>
+          <h2>{data.location.name}</h2>
           <h3>
             {data.location.region} {data.location.region ? ", " : " "}
             {data.location.country}
@@ -114,8 +161,7 @@ const Home = () => {
               )}
             </div>
             <div className="detailed-view">
-              <div className="item">Wind speed: {data.current.wind_kph}</div>
-              <div className="item">Humidity: {data.current.humidity}</div>
+              {parameters.map((parameter, i) => detailedView(parameter, i))}
             </div>
           </div>
 
