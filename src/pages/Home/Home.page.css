@@ -1,6 +1,7 @@
 .home {
   margin: 1rem;
 }
+
 .navbar {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -23,6 +24,7 @@
   border: 1px solid #ccc;
   border-radius: 4px 0 0 4px;
   box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .search-btn {
@@ -31,6 +33,7 @@
   padding: 8px 15px;
   border-radius: 0 4px 4px 0;
   border-left: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .search-btn-icon {
   width: 20px;

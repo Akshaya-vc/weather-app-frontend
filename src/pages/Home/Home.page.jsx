@@ -52,7 +52,7 @@ const Home = () => {
     else {
       localStorage.setItem("toggle-state", toggleScale);
     }
-  }, []);
+  }, [toggleScale]);
 
   // to switch between two temperature scales
   const handleTempToggle = () => {
