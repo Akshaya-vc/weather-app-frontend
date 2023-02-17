@@ -14,7 +14,7 @@ const Forecast = ({ toggleScale, perDayData, index }) => {
     <div className="forecast-item" key={index}>
       <img src={perDayData.day.condition.icon} alt="" />
       <p className="forecast-day">{day}</p>
-      {toggleScale.temperature ? (
+      {toggleScale ? (
         <p className="forecast-temp">{perDayData.day.maxtemp_f}&#8457;</p>
       ) : (
         <p className="forecast-temp">{perDayData.day.maxtemp_c}&#8451;</p>

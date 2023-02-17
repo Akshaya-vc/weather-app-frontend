@@ -8,7 +8,7 @@ const Scale = ({ toggleScale, handleTempToggle }) => {
       <div className="scale">
         <button
           style={{
-            backgroundColor: !toggleScale.temperature ? "#4dabf5" : "white",
+            backgroundColor: !toggleScale ? "#4dabf5" : "white",
           }}
           className="scale-icon scale-icon-1"
           onClick={handleTempToggle}
@@ -17,7 +17,7 @@ const Scale = ({ toggleScale, handleTempToggle }) => {
         </button>
         <button
           style={{
-            backgroundColor: toggleScale.temperature ? "#4dabf5" : "white",
+            backgroundColor: toggleScale ? "#4dabf5" : "white",
           }}
           className="scale-icon scale-icon-2"
           onClick={handleTempToggle}

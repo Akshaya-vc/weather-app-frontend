@@ -17,10 +17,7 @@ const Home = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const [toggleScale, setToggleScale] = useState({
-    temperature: false,
-    distance: false,
-  });
+  const [toggleScale, setToggleScale] = useState(false);
   const handleChange = (e) => {
     setInput(e.target.value);
   };
@@ -50,11 +47,17 @@ const Home = () => {
   // load initial data on refresh
   useEffect(() => {
     getForecast("London");
+    const value = window.localStorage.getItem("toggle-state");
+    if (value !== null) setToggleScale(JSON.parse(value));
+    else {
+      localStorage.setItem("toggle-state", toggleScale);
+    }
   }, []);
 
   // to switch between two temperature scales
   const handleTempToggle = () => {
-    setToggleScale({ ...toggleScale, temperature: !toggleScale.temperature });
+    setToggleScale(!toggleScale);
+    localStorage.setItem("toggle-state", !toggleScale);
   };
   // return <Loader />;
   if (isLoading) return <Loader />;
@@ -106,7 +109,7 @@ const Home = () => {
                   alt="weather-icon"
                 />
                 <div className="overview-text">
-                  {toggleScale.temperature ? (
+                  {toggleScale ? (
                     <h1>{data.current.temp_f}&#8457;</h1>
                   ) : (
                     <h1>{data.current.temp_c}&#8451;</h1>
