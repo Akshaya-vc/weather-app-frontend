@@ -41,13 +41,14 @@ const Home = () => {
     handleSubmit("London");
   }, []);
 
+  // to switch between two temperature scales
   const handleTempToggle = () => {
     setToggleScale({ ...toggleScale, temperature: !toggleScale.temperature });
-    console.log("in parent", toggleScale);
   };
 
   return (
     <div className="home">
+      {/* Navbar */}
       <div className="navbar">
         {/* Search bar */}
         <div className="search">
@@ -74,8 +75,9 @@ const Home = () => {
       </div>
 
       {Object.keys(data).length !== 0 ? (
-        <div className="content">
-          <div className="location-details">
+        <div className="body">
+          {/* Location header */}
+          <div className="body-item location">
             <h2>{data.location.name}</h2>
             <h3>
               {data.location.region} {data.location.region ? ", " : " "}
@@ -83,19 +85,22 @@ const Home = () => {
             </h3>
           </div>
 
-          <div className="content-columns">
+          <div className="body-item current">
+            {/* Column 1 */}
             <div className="overview">
               <img
                 src={data.current.condition.icon}
                 className="main-icon"
                 alt="weather-icon"
               />
-              {toggleScale.temperature ? (
-                <h1>{data.current.temp_f}&#8457;</h1>
-              ) : (
-                <h1>{data.current.temp_c}&#8451;</h1>
-              )}
-              <h3>{data.current.condition.text}</h3>
+              <div className="overview-text">
+                {toggleScale.temperature ? (
+                  <h1>{data.current.temp_f}&#8457;</h1>
+                ) : (
+                  <h1>{data.current.temp_c}&#8451;</h1>
+                )}
+                <h3>{data.current.condition.text}</h3>
+              </div>
             </div>
             <div className="detailed-view">
               {parameters.map((parameter, i) => (
@@ -104,13 +109,15 @@ const Home = () => {
             </div>
           </div>
 
-          <h3>7 Day forecast</h3>
-          <div className="forecast-container">
-            {data.forecast.forecastday.map((day, i) => {
-              return (
-                <Forecast toggleScale={toggleScale} perDayData={day} i={i} />
-              );
-            })}
+          <div className="body-item forecast">
+            <h2>7 Day Forecast</h2>
+            <div className="forecast-details">
+              {data.forecast.forecastday.map((day, i) => {
+                return (
+                  <Forecast toggleScale={toggleScale} perDayData={day} i={i} />
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : null}

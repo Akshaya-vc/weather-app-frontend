@@ -1,3 +1,10 @@
 .forecast-item {
   padding: 2%;
 }
+.forecast-temp{
+font-size: 1.5rem;
+}
+.forecast-day{
+  font-size: 1.3rem;
+  font-weight: 600;
+}

@@ -10,14 +10,14 @@ const Forecast = ({ toggleScale, perDayData, index }) => {
     " " +
     d.toString().split(" ")[2];
 
-  return (  
+  return (
     <div className="forecast-item" key={index}>
       <img src={perDayData.day.condition.icon} alt="" />
-      <h3>{day}</h3>
+      <p className="forecast-day">{day}</p>
       {toggleScale.temperature ? (
-        <h1>{perDayData.day.maxtemp_f}&#8457;</h1>
+        <p className="forecast-temp">{perDayData.day.maxtemp_f}&#8457;</p>
       ) : (
-        <h2>{perDayData.day.maxtemp_c}&#8451;</h2>
+        <p className="forecast-temp">{perDayData.day.maxtemp_c}&#8451;</p>
       )}
     </div>
   );

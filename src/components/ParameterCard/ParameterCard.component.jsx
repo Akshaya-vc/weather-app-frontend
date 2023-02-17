@@ -1,4 +1,5 @@
 import React from "react";
+import "./ParameterCard.component.css"
 
 const ParameterCard = ({ parameter, index , data}) => {
   return (
@@ -7,9 +8,9 @@ const ParameterCard = ({ parameter, index , data}) => {
         <img className="parameter-icon" src={parameter.icon} alt="" />
         <div className="parameter-item-name">{parameter.name}</div>
       </div>
-      <h2 className="parameter-item-value">
+      <p className="parameter-item-value">
         {data.current[parameter.variable]} {parameter.unit}
-      </h2>
+      </p>
     </div>
   );
 };
