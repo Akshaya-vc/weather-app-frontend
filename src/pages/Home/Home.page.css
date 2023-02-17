@@ -31,27 +31,7 @@
 .search-btn-icon {
   width: 20px;
 }
-.scale {
-  display: flex;
-}
-.scale-icon {
-  background-color: #4dabf5;
-  padding: 8px 15px;
-}
 
-.scale-icon-1 {
-  background-color: white;
-}
-
-.scale-icon-2 {
-  background-color: #4dabf5;
-  padding: 8px 15px;
-  border-left: 0;
-}
-
-.scale-heading {
-  padding: 8px 15px;
-}
 
 .content-columns {
   margin: 3% 5% 2% 5%;
@@ -91,6 +71,4 @@
   align-items: center;
 }
 
-.forecast-item {
-  padding: 2%;
-}
+
